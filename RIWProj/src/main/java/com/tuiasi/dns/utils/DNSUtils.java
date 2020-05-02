@@ -1,9 +1,9 @@
-package com.tuiasi.DNSHandling.utils;
+package com.tuiasi.dns.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import com.tuiasi.dns.DNSResponse;
+import lombok.SneakyThrows;
+
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -82,6 +82,13 @@ public class DNSUtils {
         }
 
         return responseBuffer;
+    }
+
+    @SneakyThrows
+    public static DNSResponse getDNSResponseFromDomain(String domain){
+        byte[] requestBuffer = createDNSRequest(domain);
+        byte[] responseBuffer = sendDNSRequest(requestBuffer, true);
+        return new DNSResponse(responseBuffer);
     }
 
 

@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a530adb2-c6ea-4c10-a227-ac32bb098a8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RIWProj2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Marinel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/DNSHandling/DNSResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/DNSResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/DNSHandling/utils/DNSUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/DNSUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/DNSHandling/utils/RCodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/RCodeType.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -102,7 +102,7 @@
       <workItem from="1588248372598" duration="2252000" />
       <workItem from="1588252297198" duration="939000" />
       <workItem from="1588405257757" duration="754000" />
-      <workItem from="1588406411689" duration="8967000" />
+      <workItem from="1588406411689" duration="15988000" />
     </task>
     <servers />
   </component>

@@ -1,29 +1,26 @@
 package com.tuiasi;
 
-import com.tuiasi.DNSHandling.DNSResponse;
+import com.tuiasi.dns.DNSResponse;
+import com.tuiasi.dns.utils.DNSUtils;
 
-import java.io.IOException;
-import java.io.InvalidObjectException;
-
-import static com.tuiasi.DNSHandling.utils.DNSUtils.createDNSRequest;
-import static com.tuiasi.DNSHandling.utils.DNSUtils.sendDNSRequest;
+import static com.tuiasi.http.HTTPUtils.createRequest;
 
 public class Application {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+
+        //LAB05
         String domain = "www.tuiasi.ro";
-
-        byte[] requestBuffer = createDNSRequest(domain);
-        byte[] responseBuffer = sendDNSRequest(requestBuffer, true);
-
+        DNSResponse dnsResponse = null;
         try {
-            DNSResponse dnsResponse = new DNSResponse(responseBuffer);
-            System.out.println(dnsResponse.toString());
-        } catch (InvalidObjectException e){
-            e.printStackTrace();
+            dnsResponse = DNSUtils.getDNSResponseFromDomain(domain);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        //LAB06
+        assert dnsResponse != null;
+        createRequest("/", domain, 80);
+
     }
-
-
 }

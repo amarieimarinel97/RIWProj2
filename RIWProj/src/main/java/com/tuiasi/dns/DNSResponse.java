@@ -1,6 +1,6 @@
-package com.tuiasi.DNSHandling;
+package com.tuiasi.dns;
 
-import com.tuiasi.DNSHandling.utils.RCodeType;
+import com.tuiasi.dns.utils.RCodeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tuiasi.DNSHandling.utils.DNSUtils.readIPAddress;
+import static com.tuiasi.dns.utils.DNSUtils.readIPAddress;
 
 @Data
 @Builder
@@ -47,7 +47,7 @@ public class DNSResponse {
         this.questions = din.readShort();
         this.answers = din.readShort();
         if(this.answers<=0)
-            throw new InvalidObjectException("Warning: Answers Count = "+this.answers);
+            throw new InvalidObjectException("Error: Answers Count = "+this.answers);
 
         this.authority = din.readShort();
         this.additional = din.readShort();

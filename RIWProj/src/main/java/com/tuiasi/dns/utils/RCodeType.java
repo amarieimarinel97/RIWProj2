@@ -1,4 +1,4 @@
-package com.tuiasi.DNSHandling.utils;
+package com.tuiasi.dns.utils;
 
 public enum RCodeType {
     NO_ERROR_CONDITION,
