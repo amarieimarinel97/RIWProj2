@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a530adb2-c6ea-4c10-a227-ac32bb098a8e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http/www.tuiasi.ro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/http/www.tuiasi.ro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/81.180.223.65/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/www.ac.tuiasi.ro/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/www.ac.tuiasi.ro/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/www.google.com/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/www.tuiasi.ro/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/www.tuiasi.ro/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/HTTPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/HTTPUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/CrawlURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/CrawlURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/HTTPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/InternalErrorCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/exception/InternalErrorCodes.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,15 +79,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Application1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tuiasi.Application1" />
+    <configuration name="LinkHandlingUtilsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RIWProj2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.tuiasi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LinkHandlingUtilsTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinkHandlingUtilsTest.testLinkToFileWithPathQueryAndFragment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RIWProj2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LinkHandlingUtilsTest" />
+      <option name="METHOD_NAME" value="testLinkToFileWithPathQueryAndFragment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinkHandlingUtilsTest.testLinkToFileWithoutProtocolWithoutWWW" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RIWProj2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LinkHandlingUtilsTest" />
+      <option name="METHOD_NAME" value="testLinkToFileWithoutProtocolWithoutWWW" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinkHandlingUtilsTest.testRobotsLinkToFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RIWProj2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LinkHandlingUtilsTest" />
+      <option name="METHOD_NAME" value="testRobotsLinkToFile" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -85,7 +121,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
-        <item itemvalue="Application.Application1" />
+        <item itemvalue="JUnit.LinkHandlingUtilsTest" />
+        <item itemvalue="JUnit.LinkHandlingUtilsTest.testLinkToFileWithPathQueryAndFragment" />
+        <item itemvalue="JUnit.LinkHandlingUtilsTest.testRobotsLinkToFile" />
+        <item itemvalue="JUnit.LinkHandlingUtilsTest.testLinkToFileWithoutProtocolWithoutWWW" />
       </list>
     </recent_temporary>
   </component>
@@ -104,7 +143,7 @@
       <workItem from="1588252297198" duration="939000" />
       <workItem from="1588405257757" duration="754000" />
       <workItem from="1588406411689" duration="16834000" />
-      <workItem from="1590305570556" duration="12467000" />
+      <workItem from="1590305570556" duration="17103000" />
     </task>
     <servers />
   </component>
@@ -123,21 +162,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/CrawlURL.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

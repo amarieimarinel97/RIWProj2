@@ -1,25 +1,22 @@
-package com.tuiasi.http;
+package com.tuiasi.http.utils;
 
-import com.tuiasi.exception.BadGatewayException;
-import com.tuiasi.exception.BadRequestException;
-import com.tuiasi.exception.NotFoundException;
-import com.tuiasi.exception.UnknownCodeException;
+import com.tuiasi.exception.*;
 import lombok.SneakyThrows;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URI;
 import java.net.URL;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.tuiasi.http.InternalErrorCodes.*;
+import static com.tuiasi.exception.InternalErrorCodes.*;
+import static com.tuiasi.http.utils.LinkHandlingUtils.processLinkToWorkingDirPath;
 
 public class HTTPUtils {
     public final static String USER_AGENT = "CLIENT RIW";
-    public final static String WORKING_PATH = "./http";
+    public final static String WORKING_PATH = "./http/";
     private static final String HTTP_VERSION = "HTTP/1.1";
     public static final Integer HTTP_PORT = 80;
 
@@ -73,20 +70,7 @@ public class HTTPUtils {
     }
 
     private static String getFilePath(String path, String domain) {
-        String filePath = WORKING_PATH + "/" +
-                (domain.toLowerCase().trim().startsWith("http") ?
-                        "www."+domain.split("//")[1]
-                        : domain)
-                + path;
-
-
-        if (!(filePath.endsWith(".html") || filePath.endsWith("htm")) && !(path.equals("/robots.txt") || domain.endsWith("robots.txt"))) {
-            if (!filePath.endsWith("/")) {
-                filePath += "/";
-            }
-            filePath += "index.html";
-        }
-
+        String filePath = processLinkToWorkingDirPath(path + domain);
         File file = new File(filePath);
         if (!file.exists()) {
             File pDir = file.getParentFile();
@@ -204,7 +188,6 @@ public class HTTPUtils {
     private static int getHttpsStatusCode(HttpsURLConnection connection) {
         return connection.getResponseCode();
     }
-
 
 
 }

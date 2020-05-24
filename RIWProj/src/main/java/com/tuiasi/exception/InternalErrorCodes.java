@@ -1,4 +1,4 @@
-package com.tuiasi.http;
+package com.tuiasi.exception;
 
 
 import lombok.Getter;
