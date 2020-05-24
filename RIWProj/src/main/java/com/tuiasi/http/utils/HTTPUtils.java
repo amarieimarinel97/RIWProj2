@@ -1,12 +1,14 @@
 package com.tuiasi.http.utils;
 
 import com.tuiasi.exception.*;
+import com.tuiasi.http.CrawlURL;
 import lombok.SneakyThrows;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,21 +22,24 @@ public class HTTPUtils {
     private static final String HTTP_VERSION = "HTTP/1.1";
     public static final Integer HTTP_PORT = 80;
 
-    @SneakyThrows
-    public static InternalErrorCodes createRequest(String path, String domain, int port) {
+    public static InternalErrorCodes createRequest(CrawlURL crawlURL, int port) {
         String response = "";
         HttpsURLConnection httpsRequest = null;
         String httpRequest;
-        if (isHttpsRequest(domain)) {
-            httpsRequest = generateHTTPSGetRequest(domain, path);
+        if (isHttpsRequest(crawlURL.toString())) {
+            try {
+                httpsRequest = generateHTTPSGetRequest(crawlURL);
+            } catch (IOException e) {
+                return REMOVE_FROM_QUEUE;
+            }
         } else {
-            httpRequest = genereateGetRequest(path, domain, USER_AGENT);
-            BufferedReader bufferedReader = sendHttpRequest(domain, port, httpRequest);
+            httpRequest = genereateGetRequest(crawlURL, USER_AGENT);
+            BufferedReader bufferedReader = sendHttpRequest(crawlURL.getDomain(), port, httpRequest);
             response = bufferedReader.lines().collect(Collectors.joining("\n"));
         }
 
         try {
-            handleStatusCode(response, path, domain, Optional.ofNullable(httpsRequest));
+            handleStatusCode(response, crawlURL, Optional.ofNullable(httpsRequest));
             return SUCCESS;
         } catch (BadRequestException | UnknownCodeException e) {
             return REMOVE_FROM_QUEUE;
@@ -50,8 +55,7 @@ public class HTTPUtils {
         return domain.toLowerCase().trim().startsWith("https");
     }
 
-    @SneakyThrows
-    private static String writeHTMLBody(String path, String domain, String response, String headers) {
+    private static String writeHTMLBody(CrawlURL crawlURL, String response, String headers) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new StringReader(response));
         StringBuilder sb = new StringBuilder();
 
@@ -61,7 +65,7 @@ public class HTTPUtils {
                 sb.append(line).append("\n");
         }
 
-        String filePath = getFilePath(path, domain);
+        String filePath = getFilePath(crawlURL);
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         writer.write(sb.toString());
@@ -69,8 +73,8 @@ public class HTTPUtils {
         return sb.toString();
     }
 
-    private static String getFilePath(String path, String domain) {
-        String filePath = processLinkToWorkingDirPath(path + domain);
+    private static String getFilePath(CrawlURL crawlURL) {
+        String filePath = processLinkToWorkingDirPath(crawlURL.toString());
         File file = new File(filePath);
         if (!file.exists()) {
             File pDir = file.getParentFile();
@@ -96,10 +100,10 @@ public class HTTPUtils {
         return sb.toString();
     }
 
-    public static String genereateGetRequest(String path, String domain, String userAgent) {
+    public static String genereateGetRequest(CrawlURL crawlURL, String userAgent) {
         StringBuilder sb = new StringBuilder();
-        sb.append("GET ").append(path).append(" ").append(HTTP_VERSION).append("\r\n");
-        sb.append("Host: ").append(domain).append("\r\n");
+        sb.append("GET ").append(crawlURL.getPath()).append(" ").append(HTTP_VERSION).append("\r\n");
+        sb.append("Host: ").append(crawlURL.getDomain()).append("\r\n");
         sb.append("User-Agent: ").append(userAgent).append("\r\n");
         sb.append("Connection: close\r\n");
         sb.append("\r\n");
@@ -117,8 +121,8 @@ public class HTTPUtils {
         return bufferedReader;
     }
 
-    public static HttpsURLConnection generateHTTPSGetRequest(String domain, String path) throws IOException {
-        URL url = new URL(domain + path);
+    public static HttpsURLConnection generateHTTPSGetRequest(CrawlURL crawlURL) throws IOException {
+        URL url = new URL(crawlURL.toString());
         return (HttpsURLConnection) url.openConnection();
     }
 
@@ -126,7 +130,7 @@ public class HTTPUtils {
         return Integer.parseInt(response.substring(HTTP_VERSION.length(), HTTP_VERSION.length() + 4).trim());
     }
 
-    public static void handleStatusCode(String response, String path, String domain, Optional<HttpsURLConnection> connection) throws BadRequestException, NotFoundException, BadGatewayException, UnknownCodeException {
+    public static void handleStatusCode(String response, CrawlURL crawlURL, Optional<HttpsURLConnection> connection) throws BadRequestException, NotFoundException, BadGatewayException, UnknownCodeException {
         int statusCode;
         boolean isHttps = connection.isPresent();
         if (isHttps)
@@ -136,16 +140,26 @@ public class HTTPUtils {
 
         switch (statusCode) {
             case 200:
-                if (isHttps)
-                    writeHTMLBody(path, domain, getHttpsContent(connection.get()), getResponseHeaders(response));
-                else
-                    writeHTMLBody(path, domain, response, getResponseHeaders(response));
+                try {
+                    if (isHttps)
+                        writeHTMLBody(crawlURL, getHttpsContent(connection.get()), getResponseHeaders(response));
+                    else
+                        writeHTMLBody(crawlURL, response, getResponseHeaders(response));
+                } catch (IOException e) {
+                    throw new NotFoundException(response);
+                }
                 break;
             case 301:
             case 302:
-                String newLocation = isHttps ? connection.get().getHeaderField("Location")
-                        : getLocationHeader(response);
-                createRequest("", newLocation, HTTP_PORT);
+                CrawlURL newLocation = null;
+                try {
+                    newLocation = new CrawlURL(isHttps ? connection.get().getHeaderField("Location")
+                            : getLocationHeader(response));
+                    createRequest(newLocation, HTTP_PORT);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case 400:
                 throw new BadRequestException(response);

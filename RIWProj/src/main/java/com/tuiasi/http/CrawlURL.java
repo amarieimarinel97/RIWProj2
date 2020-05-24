@@ -8,29 +8,38 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.tuiasi.http.utils.LinkHandlingUtils.processLinkToStandardForm;
+
 @Data
 public class CrawlURL {
     private String domain;
     private String protocol;
     private String path;
     private Optional<LocalDateTime> nextAccess;
-    private boolean wasProcessed;
+    private boolean toProcess;
 
     @Override
     public String toString() {
-        return this.protocol+"://"+this.getDomain()+"/"+this.path;
+        return this.protocol + "://" + this.getDomain() + this.path;
     }
 
     public CrawlURL(String link) throws URISyntaxException {
+        boolean isHttps = false;
+        this.toProcess=true;
+        if (link.startsWith("https"))
+            isHttps = true;
+
+        link = processLinkToStandardForm(link);
         link = link.toLowerCase().trim().startsWith("www") ? "http://" + link : link;
+
         URI uri = new URI(link);
         this.path =
                 (Objects.isNull(uri.getPath()) ? "" : uri.getPath()) +
-                        (Objects.isNull(uri.getQuery()) ? "" : "?" + uri.getQuery());
-        this.domain = uri.getHost();
-        this.protocol = uri.getScheme();
+                        (Objects.isNull(uri.getQuery()) ? "" : "?" + uri.getQuery()) +
+                            (Objects.isNull(uri.getFragment()) ? "" : "#" + uri.getFragment());
+        this.domain = getFixedDomain(uri.getHost());
+        this.protocol = isHttps ? "https" : uri.getScheme();
         this.nextAccess = Optional.empty();
-        this.wasProcessed=false;
     }
 
     @Override
@@ -46,5 +55,19 @@ public class CrawlURL {
     @Override
     public int hashCode() {
         return Objects.hash(domain, protocol, path);
+    }
+
+    private String getFixedDomain(String host) {
+        int pointsNo = 0;
+        for (int i = 0; i < host.length(); i++)
+            if (host.charAt(i) == '.')
+                pointsNo++;
+        if (pointsNo == 2)
+            return host;
+        else {
+            String[] elements = host.split("\\.");
+            this.toProcess=false;
+            return "www." + elements[elements.length - 2] + "." + elements[elements.length - 1];
+        }
     }
 }

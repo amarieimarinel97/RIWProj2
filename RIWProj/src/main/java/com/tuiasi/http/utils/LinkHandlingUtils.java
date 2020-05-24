@@ -14,7 +14,7 @@ public class LinkHandlingUtils {
 
         String filePath = processLinkToStandardForm(link);
 
-        filePath = filePath.replaceAll("\\?", "/").replaceAll("\\*", "/").replaceAll("\\|", "/").replaceAll("#", "/");
+        filePath = filePath.replaceAll(":", "/").replaceAll("\\?", "/").replaceAll("\\*", "/").replaceAll("\\|", "/").replaceAll("#", "/");
 
         if (!(filePath.endsWith(".html") || filePath.endsWith("htm")) && !(link.endsWith("/robots.txt") || link.endsWith("robots.txt"))) {
             if (!filePath.endsWith("/")) {
