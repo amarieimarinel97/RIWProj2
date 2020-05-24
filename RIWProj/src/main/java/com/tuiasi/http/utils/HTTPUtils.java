@@ -141,8 +141,10 @@ public class HTTPUtils {
         switch (statusCode) {
             case 200:
                 try {
-                    if (isHttps)
+                    if (isHttps) {
                         writeHTMLBody(crawlURL, getHttpsContent(connection.get()), getResponseHeaders(response));
+                        connection.get().disconnect();
+                    }
                     else
                         writeHTMLBody(crawlURL, response, getResponseHeaders(response));
                 } catch (IOException e) {
@@ -156,6 +158,9 @@ public class HTTPUtils {
                     newLocation = new CrawlURL(isHttps ? connection.get().getHeaderField("Location")
                             : getLocationHeader(response));
                     createRequest(newLocation, HTTP_PORT);
+                    if (isHttps)
+                        connection.get().disconnect();
+
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }

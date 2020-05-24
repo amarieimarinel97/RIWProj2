@@ -25,15 +25,26 @@ public class Crawler {
     public static List<CrawlURL> urls = new ArrayList<>();
 
     public static void launchCrawler() {
+        int urlsCrawled = 0;
+        long startTime = System.currentTimeMillis();
+
+
         while (!urls.isEmpty()) {
-            for (int i = 0; i < urls.size(); ++i)
+            for (int i = 0; i < urls.size(); ++i) {
+                ++urlsCrawled;
                 if (urls.get(i).isToProcess())
                     Crawler.processNextUrl(urls.get(i));
+                if (System.currentTimeMillis() - startTime > 60000) {
+                    System.out.println("Crawled " + urlsCrawled + " in 1 minute");
+                    urlsCrawled = 0;
+                    startTime = System.currentTimeMillis();
+                }
+            }
         }
     }
 
     private static void processNextUrl(CrawlURL crawlURL) {
-        System.out.println("===============\nINFO: Crawling " + crawlURL.toString());
+        //System.out.println("===============\nINFO: Crawling " + crawlURL.toString());
         if (!robotsDisallowRules.containsKey(crawlURL.getDomain()))
             handleRobotsTxtOfDomain(crawlURL);
         for (String forbiddenPath : robotsDisallowRules.get(crawlURL.getDomain())) {
@@ -46,15 +57,15 @@ public class Crawler {
         switch (code) {
             case SUCCESS:
                 urls.addAll(retrieveLinksFromHtml(processLinkToWorkingDirPath(crawlURL.toString())));
-                System.out.println("INFO: Crawled " + crawlURL.toString());
+                //System.out.println("INFO: Crawled " + crawlURL.toString());
                 break;
             case REMOVE_FROM_QUEUE:
                 urls.remove(crawlURL);
-                System.out.println("WARN: Removed from queue " + crawlURL.toString());
+                //System.out.println("WARN: Removed from queue " + crawlURL.toString());
                 break;
             case ADD_DELAY:
             case NOT_FOUND:
-                System.out.println("WARN: Url not found");
+                //System.out.println("WARN: Url not found");
 
         }
 
@@ -68,7 +79,7 @@ public class Crawler {
         try {
             htmlContent = FileUtils.readFromFile(filePath);
         } catch (FileNotFoundException e) {
-            System.out.println("WARN: Couldn't access file " + filePath);
+            //System.out.println("WARN: Couldn't access file " + filePath);
             return result;
         }
         Document doc = Jsoup.parse(htmlContent);

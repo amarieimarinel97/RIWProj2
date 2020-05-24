@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a530adb2-c6ea-4c10-a227-ac32bb098a8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http/www.ac.tuiasi.ro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/http/www.ac.tuiasi.ro/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http/www.imdb.com/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/http/www.imdb.com/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/files/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/files/utils/FileUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/CrawlURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/CrawlURL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/LinkHandlingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/LinkHandlingUtils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +137,7 @@
       <workItem from="1588252297198" duration="939000" />
       <workItem from="1588405257757" duration="754000" />
       <workItem from="1588406411689" duration="16834000" />
-      <workItem from="1590305570556" duration="27339000" />
+      <workItem from="1590305570556" duration="28825000" />
     </task>
     <task id="LOCAL-00001" summary="updated gitignore">
       <created>1590333450857</created>
@@ -190,11 +184,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
-          <line>153</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
           <line>44</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
@@ -205,8 +194,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java</url>
-          <line>94</line>
+          <line>105</line>
           <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

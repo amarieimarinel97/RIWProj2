@@ -57,12 +57,14 @@ public class CrawlURL {
         return Objects.hash(domain, protocol, path);
     }
 
-    private String getFixedDomain(String host) {
+    private String getFixedDomain(String host) throws URISyntaxException {
         int pointsNo = 0;
+        if(Objects.isNull(host))
+            throw new URISyntaxException("Malformed url","Null host");
         for (int i = 0; i < host.length(); i++)
             if (host.charAt(i) == '.')
                 pointsNo++;
-        if (pointsNo == 2)
+        if (pointsNo < 3)
             return host;
         else {
             String[] elements = host.split("\\.");
