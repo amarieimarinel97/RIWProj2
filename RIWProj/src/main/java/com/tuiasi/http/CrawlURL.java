@@ -17,6 +17,7 @@ public class CrawlURL {
     private String path;
     private Optional<LocalDateTime> nextAccess;
     private boolean toProcess;
+    private String ipAddress;
 
     @Override
     public String toString() {

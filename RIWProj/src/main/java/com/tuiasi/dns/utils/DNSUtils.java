@@ -84,10 +84,9 @@ public class DNSUtils {
         return responseBuffer;
     }
 
-    @SneakyThrows
-    public static DNSResponse getDNSResponseFromDomain(String domain){
+    public static DNSResponse getDNSResponseFromDomain(String domain) throws IOException {
         byte[] requestBuffer = createDNSRequest(domain);
-        byte[] responseBuffer = sendDNSRequest(requestBuffer, true);
+        byte[] responseBuffer = sendDNSRequest(requestBuffer, false);
         return new DNSResponse(responseBuffer);
     }
 

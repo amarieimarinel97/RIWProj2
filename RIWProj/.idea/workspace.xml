@@ -5,7 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/DNSUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/DNSUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/CrawlURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/CrawlURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +75,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in RIWProj2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RIWProj2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CrawlUrlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RIWProj2" />
       <option name="PACKAGE_NAME" value="" />
@@ -102,23 +112,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CrawlUrlTest.testLinkToStandardWithoutProtocolWithoutWWW" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RIWProj2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CrawlUrlTest" />
-      <option name="METHOD_NAME" value="testLinkToStandardWithoutProtocolWithoutWWW" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.All in RIWProj2" />
         <item itemvalue="JUnit.CrawlUrlTest" />
         <item itemvalue="JUnit.CrawlUrlTest.testLinkToStandardWithSubdomain" />
         <item itemvalue="JUnit.CrawlUrlTest.testHTTPSLinkToStandard" />
-        <item itemvalue="JUnit.CrawlUrlTest.testLinkToStandardWithoutProtocolWithoutWWW" />
       </list>
     </recent_temporary>
   </component>
@@ -137,7 +137,9 @@
       <workItem from="1588252297198" duration="939000" />
       <workItem from="1588405257757" duration="754000" />
       <workItem from="1588406411689" duration="16834000" />
-      <workItem from="1590305570556" duration="28825000" />
+      <workItem from="1590305570556" duration="31001000" />
+      <workItem from="1590498574470" duration="2245000" />
+      <workItem from="1591863331483" duration="3480000" />
     </task>
     <task id="LOCAL-00001" summary="updated gitignore">
       <created>1590333450857</created>
@@ -168,42 +170,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated gitignore" />
     <option name="LAST_COMMIT_MESSAGE" value="updated gitignore" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
-          <line>104</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java</url>
-          <line>105</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RIWProj$Application.ic" NAME="Application Coverage Results" MODIFIED="1590329148391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

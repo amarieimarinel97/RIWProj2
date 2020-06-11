@@ -9,9 +9,11 @@ import org.jsoup.nodes.Document;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
+import static com.tuiasi.exception.InternalErrorCodes.NOT_FOUND;
 import static com.tuiasi.exception.InternalErrorCodes.SUCCESS;
 import static com.tuiasi.files.utils.FileUtils.checkIfStringIsNotEmpty;
 import static com.tuiasi.http.utils.HTTPUtils.HTTP_PORT;
@@ -44,29 +46,31 @@ public class Crawler {
     }
 
     private static void processNextUrl(CrawlURL crawlURL) {
-        //System.out.println("===============\nINFO: Crawling " + crawlURL.toString());
+        System.out.println("===============\nINFO: Crawling " + crawlURL.toString());
         if (!robotsDisallowRules.containsKey(crawlURL.getDomain()))
             handleRobotsTxtOfDomain(crawlURL);
         for (String forbiddenPath : robotsDisallowRules.get(crawlURL.getDomain())) {
             if (crawlURL.toString().endsWith(forbiddenPath) && !forbiddenPath.equals("/"))
                 return;
         }
-
-
-        InternalErrorCodes code = createRequest(crawlURL, HTTP_PORT);
+        InternalErrorCodes code;
+        try {
+            code = createRequest(crawlURL, HTTP_PORT);
+        } catch (UncheckedIOException e) {
+            code = NOT_FOUND;
+        }
         switch (code) {
             case SUCCESS:
                 urls.addAll(retrieveLinksFromHtml(processLinkToWorkingDirPath(crawlURL.toString())));
-                //System.out.println("INFO: Crawled " + crawlURL.toString());
+                System.out.println("INFO: Crawled " + crawlURL.toString());
                 break;
             case REMOVE_FROM_QUEUE:
                 urls.remove(crawlURL);
-                //System.out.println("WARN: Removed from queue " + crawlURL.toString());
+                System.out.println("WARN: Removed from queue " + crawlURL.toString());
                 break;
-            case ADD_DELAY:
             case NOT_FOUND:
-                //System.out.println("WARN: Url not found");
-
+                System.out.println("WARN: Url not found");
+            case ADD_DELAY:
         }
 
 
@@ -79,7 +83,7 @@ public class Crawler {
         try {
             htmlContent = FileUtils.readFromFile(filePath);
         } catch (FileNotFoundException e) {
-            //System.out.println("WARN: Couldn't access file " + filePath);
+            System.out.println("WARN: Couldn't access file " + filePath);
             return result;
         }
         Document doc = Jsoup.parse(htmlContent);

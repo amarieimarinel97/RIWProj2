@@ -1,5 +1,6 @@
 package com.tuiasi.http.utils;
 
+import com.tuiasi.dns.DNSResponse;
 import com.tuiasi.exception.*;
 import com.tuiasi.http.CrawlURL;
 import lombok.SneakyThrows;
@@ -13,6 +14,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.tuiasi.dns.utils.DNSUtils.createDNSRequest;
+import static com.tuiasi.dns.utils.DNSUtils.getDNSResponseFromDomain;
 import static com.tuiasi.exception.InternalErrorCodes.*;
 import static com.tuiasi.http.utils.LinkHandlingUtils.processLinkToWorkingDirPath;
 
@@ -26,6 +29,13 @@ public class HTTPUtils {
         String response = "";
         HttpsURLConnection httpsRequest = null;
         String httpRequest;
+
+        try {
+            DNSResponse dnsResponse = getDNSResponseFromDomain(crawlURL.getDomain());
+            crawlURL.setIpAddress(dnsResponse.getIPAddress());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (isHttpsRequest(crawlURL.toString())) {
             try {
                 httpsRequest = generateHTTPSGetRequest(crawlURL);
