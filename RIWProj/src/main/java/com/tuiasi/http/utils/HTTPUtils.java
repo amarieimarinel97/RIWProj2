@@ -14,8 +14,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.tuiasi.dns.utils.DNSUtils.createDNSRequest;
-import static com.tuiasi.dns.utils.DNSUtils.getDNSResponseFromDomain;
+import static com.tuiasi.dns.DNSCache.getDNSResponseFromDomainWithCache;
 import static com.tuiasi.exception.InternalErrorCodes.*;
 import static com.tuiasi.http.utils.LinkHandlingUtils.processLinkToWorkingDirPath;
 
@@ -31,7 +30,7 @@ public class HTTPUtils {
         String httpRequest;
 
         try {
-            DNSResponse dnsResponse = getDNSResponseFromDomain(crawlURL.getDomain());
+            DNSResponse dnsResponse = getDNSResponseFromDomainWithCache(crawlURL.getDomain());
             crawlURL.setIpAddress(dnsResponse.getIPAddress());
         } catch (IOException e) {
             e.printStackTrace();
