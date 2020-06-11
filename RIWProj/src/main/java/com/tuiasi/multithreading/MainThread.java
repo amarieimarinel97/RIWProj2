@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MainThread implements ThreadListener {
     private List<CrawlURL> urls;
-    private final int WORKERS_NUMBER_LIMIT = 6;
+    private final int WORKERS_NUMBER_LIMIT = 12;
     private int currentWorkersAlive = 0;
     private int urlsCrawled = 0;
     long startTime = System.currentTimeMillis();
