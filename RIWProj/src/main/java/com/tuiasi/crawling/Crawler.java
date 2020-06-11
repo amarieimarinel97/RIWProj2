@@ -34,8 +34,12 @@ public class Crawler {
         while (!urls.isEmpty()) {
             for (int i = 0; i < urls.size(); ++i) {
                 ++urlsCrawled;
-                if (urls.get(i).isToProcess())
-                    Crawler.processNextUrl(urls.get(i));
+                CrawlURL currentUrl = urls.get(i);
+                if (currentUrl.isToProcess()) {
+                    Crawler.processNextUrl(currentUrl);
+                    currentUrl.setToProcess(false);
+                }
+
                 if (System.currentTimeMillis() - startTime > 60000) {
                     System.out.println("Crawled " + urlsCrawled + " in 1 minute");
                     urlsCrawled = 0;

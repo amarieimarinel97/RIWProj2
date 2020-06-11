@@ -5,9 +5,7 @@ import com.tuiasi.dns.utils.DNSInfo;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.tuiasi.dns.utils.DNSUtils.createDNSRequest;
 import static com.tuiasi.dns.utils.DNSUtils.sendDNSRequest;
@@ -30,15 +28,21 @@ public class DNSCache {
     }
 
     public static Optional<DNSResponse> getCachedDns(String domain) {
+        List<DNSInfo> invalidCacheCopies = new ArrayList<>();
         for (DNSInfo dnsInfo : dnsCacheMap.keySet())
             if (dnsInfo.getDomain().toLowerCase().trim().equals(domain.toLowerCase().trim())) {
                 if (Duration.between(dnsInfo.getTimestamp(), LocalDateTime.now()).toMinutes() > CACHE_AVAILABILITY)
                     return Optional.of(dnsCacheMap.get(dnsInfo));
                 else
-                    dnsCacheMap.remove(dnsInfo);
+                    invalidCacheCopies.add(dnsInfo);
             }
-
+        removeInvalidDnsCache(invalidCacheCopies);
         return Optional.empty();
+    }
+
+    private static void removeInvalidDnsCache(List<DNSInfo> invalidCacheCopies) {
+        for (DNSInfo dnsInfo : invalidCacheCopies)
+            dnsCacheMap.remove(dnsInfo);
     }
 
     public static void setDnsCache(String domain, DNSResponse dnsResponse) {
