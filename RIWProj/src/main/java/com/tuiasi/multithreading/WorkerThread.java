@@ -16,7 +16,6 @@ public class WorkerThread extends NotifyingThread{
 
     @Override
     public void doRun() {
-        System.out.println("Thread "+this.getName()+" started.");
         Crawler.processNextUrl(crawlURL, urls);
     }
 

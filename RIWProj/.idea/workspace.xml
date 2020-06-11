@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a530adb2-c6ea-4c10-a227-ac32bb098a8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/DNSCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/DNSCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/DNSUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/dns/utils/DNSUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/http/utils/HTTPUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/multithreading/MainThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/multithreading/MainThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tuiasi/multithreading/WorkerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tuiasi/multithreading/WorkerThread.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +141,7 @@
       <workItem from="1590305570556" duration="31001000" />
       <workItem from="1590498574470" duration="2245000" />
       <workItem from="1591863331483" duration="3480000" />
-      <workItem from="1591873960907" duration="5675000" />
+      <workItem from="1591873960907" duration="7726000" />
     </task>
     <task id="LOCAL-00001" summary="updated gitignore">
       <created>1590333450857</created>
@@ -171,23 +172,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated gitignore" />
     <option name="LAST_COMMIT_MESSAGE" value="updated gitignore" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/crawling/Crawler.java</url>
-          <line>27</line>
-          <properties field="urls" class="com.tuiasi.crawling.Crawler" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tuiasi/multithreading/WorkerThread.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RIWProj$Application.ic" NAME="Application Coverage Results" MODIFIED="1590329148391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

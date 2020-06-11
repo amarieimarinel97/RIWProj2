@@ -27,7 +27,7 @@ public class DNSCache {
         return dnsResponse;
     }
 
-    private synchronized static Optional<DNSResponse> getCachedDns(String domain) {
+    private static Optional<DNSResponse> getCachedDns(String domain) {
         List<DNSInfo> invalidCacheCopies = new ArrayList<>();
         for (DNSInfo dnsInfo : dnsCacheMap.keySet())
             if (dnsInfo.getDomain().toLowerCase().trim().equals(domain.toLowerCase().trim())) {
@@ -40,12 +40,12 @@ public class DNSCache {
         return Optional.empty();
     }
 
-    private synchronized static void removeInvalidDnsCache(List<DNSInfo> invalidCacheCopies) {
+    private static void removeInvalidDnsCache(List<DNSInfo> invalidCacheCopies) {
         for (DNSInfo dnsInfo : invalidCacheCopies)
             dnsCacheMap.remove(dnsInfo);
     }
 
-    private synchronized static void setDnsCache(String domain, DNSResponse dnsResponse) {
+    private static void setDnsCache(String domain, DNSResponse dnsResponse) {
         dnsCacheMap.put(DNSInfo.builder().domain(domain).timestamp(LocalDateTime.now()).build(),
                 dnsResponse);
     }

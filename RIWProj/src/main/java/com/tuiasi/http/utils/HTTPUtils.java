@@ -11,6 +11,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,8 @@ public class HTTPUtils {
     public final static String WORKING_PATH = "./http/";
     private static final String HTTP_VERSION = "HTTP/1.1";
     public static final Integer HTTP_PORT = 80;
+    private static final Integer REDIRECTS_LIMIT = 5;
+    private static Map<CrawlURL, Integer> timesRedirected = new HashMap<>();
 
     public static InternalErrorCodes createRequest(CrawlURL crawlURL, int port) {
         String response = "";
@@ -153,15 +157,16 @@ public class HTTPUtils {
                     if (isHttps) {
                         writeHTMLBody(crawlURL, getHttpsContent(connection.get()), getResponseHeaders(response));
                         connection.get().disconnect();
-                    }
-                    else
+                    } else
                         writeHTMLBody(crawlURL, response, getResponseHeaders(response));
                 } catch (IOException e) {
                     throw new NotFoundException(response);
                 }
+                timesRedirected.remove(crawlURL);
                 break;
             case 301:
             case 302:
+                handleRedirectCounter(crawlURL, response);
                 CrawlURL newLocation = null;
                 try {
                     newLocation = new CrawlURL(isHttps ? connection.get().getHeaderField("Location")
@@ -183,6 +188,21 @@ public class HTTPUtils {
                 throw new BadGatewayException(response);
             default:
                 throw new UnknownCodeException(response);
+        }
+    }
+
+    private static void handleRedirectCounter(CrawlURL crawlURL, String response) throws NotFoundException {
+        if (timesRedirected.containsKey(crawlURL)) {
+            int redirectsCounter = timesRedirected.get(crawlURL);
+            System.out.println(crawlURL.getDomain()+" redirected "+redirectsCounter+" times");
+
+            if (redirectsCounter >= REDIRECTS_LIMIT)
+                throw new NotFoundException(response);
+            else
+                timesRedirected.replace(crawlURL, redirectsCounter+1);
+        }else{
+            System.out.println(crawlURL.getDomain()+" redirected "+1+" time");
+            timesRedirected.put(crawlURL, 1);
         }
     }
 
@@ -212,9 +232,12 @@ public class HTTPUtils {
         return sb.toString();
     }
 
-    @SneakyThrows
     private static int getHttpsStatusCode(HttpsURLConnection connection) {
-        return connection.getResponseCode();
+        try {
+            return connection.getResponseCode();
+        } catch (IOException e) {
+            return 400;
+        }
     }
 
 
