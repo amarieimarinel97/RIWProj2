@@ -12,10 +12,10 @@ import static com.tuiasi.dns.utils.DNSUtils.sendDNSRequest;
 
 public class DNSCache {
     private static final double CACHE_AVAILABILITY = 60; // in minutes
-    private static Map<DNSInfo, DNSResponse> dnsCacheMap = new HashMap<>();
+    private static  Map<DNSInfo, DNSResponse> dnsCacheMap = new HashMap<>();
 
 
-    public static DNSResponse getDNSResponseFromDomainWithCache(String domain) throws IOException {
+    public synchronized static DNSResponse getDNSResponseFromDomainWithCache(String domain) throws IOException {
         Optional<DNSResponse> cachedDnsResponse = getCachedDns(domain);
         if (cachedDnsResponse.isPresent())
             return cachedDnsResponse.get();
@@ -27,7 +27,7 @@ public class DNSCache {
         return dnsResponse;
     }
 
-    public static Optional<DNSResponse> getCachedDns(String domain) {
+    private synchronized static Optional<DNSResponse> getCachedDns(String domain) {
         List<DNSInfo> invalidCacheCopies = new ArrayList<>();
         for (DNSInfo dnsInfo : dnsCacheMap.keySet())
             if (dnsInfo.getDomain().toLowerCase().trim().equals(domain.toLowerCase().trim())) {
@@ -40,12 +40,12 @@ public class DNSCache {
         return Optional.empty();
     }
 
-    private static void removeInvalidDnsCache(List<DNSInfo> invalidCacheCopies) {
+    private synchronized static void removeInvalidDnsCache(List<DNSInfo> invalidCacheCopies) {
         for (DNSInfo dnsInfo : invalidCacheCopies)
             dnsCacheMap.remove(dnsInfo);
     }
 
-    public static void setDnsCache(String domain, DNSResponse dnsResponse) {
+    private synchronized static void setDnsCache(String domain, DNSResponse dnsResponse) {
         dnsCacheMap.put(DNSInfo.builder().domain(domain).timestamp(LocalDateTime.now()).build(),
                 dnsResponse);
     }

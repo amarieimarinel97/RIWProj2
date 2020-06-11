@@ -3,6 +3,7 @@ package com.tuiasi.crawling;
 import com.tuiasi.exception.InternalErrorCodes;
 import com.tuiasi.files.utils.FileUtils;
 import com.tuiasi.http.CrawlURL;
+import com.tuiasi.multithreading.MainThread;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,30 +27,14 @@ public class Crawler {
 
     public static List<CrawlURL> urls = new ArrayList<>();
 
+    @SneakyThrows
     public static void launchCrawler() {
-        int urlsCrawled = 0;
-        long startTime = System.currentTimeMillis();
+        MainThread mainThread = new MainThread(urls);
+        mainThread.run();
 
-
-        while (!urls.isEmpty()) {
-            for (int i = 0; i < urls.size(); ++i) {
-                ++urlsCrawled;
-                CrawlURL currentUrl = urls.get(i);
-                if (currentUrl.isToProcess()) {
-                    Crawler.processNextUrl(currentUrl);
-                    currentUrl.setToProcess(false);
-                }
-
-                if (System.currentTimeMillis() - startTime > 60000) {
-                    System.out.println("Crawled " + urlsCrawled + " in 1 minute");
-                    urlsCrawled = 0;
-                    startTime = System.currentTimeMillis();
-                }
-            }
-        }
     }
 
-    private static void processNextUrl(CrawlURL crawlURL) {
+    public static void processNextUrl(CrawlURL crawlURL, List<CrawlURL> urls) {
         System.out.println("===============\nINFO: Crawling " + crawlURL.toString());
         if (!robotsDisallowRules.containsKey(crawlURL.getDomain()))
             handleRobotsTxtOfDomain(crawlURL);

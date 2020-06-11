@@ -63,12 +63,12 @@ public class DNSUtils {
         DatagramSocket socket = new DatagramSocket();
         DatagramPacket dnsRequest = new DatagramPacket(DNSMessage, DNSMessage.length, ipAddress, DNS_SERVER_PORT);
         socket.send(dnsRequest);
-        System.out.println("Request sent");
+//        System.out.println("Request sent");
 
         byte[] responseBuffer = new byte[512];
         DatagramPacket response = new DatagramPacket(responseBuffer, responseBuffer.length);
         socket.receive(response);
-        System.out.println("Response received");
+//        System.out.println("Response received");
 
         if (printMessages) {
             System.out.println("\n==================================");
